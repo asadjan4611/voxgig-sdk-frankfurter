@@ -1,0 +1,44 @@
+# BasicProviderFlow
+
+main: kit: flow: BasicProviderFlow:
+{
+  entity: "provider",
+  kind: "basic",
+  name: "BasicProviderFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "provider_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "provider_ref01",
+        srcdatavar: "provider_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "provider01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-provider_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicProviderFlow"
+}

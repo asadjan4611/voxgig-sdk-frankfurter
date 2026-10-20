@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      auth: false
+      contact: {
+        url: "https://github.com/lineofflight/frankfurter/issues"
+      }
+      description: "Frankfurter is an open-source API for current and historical foreign exchange rates published by central banks."
+      license: {
+        name: "MIT"
+        url: "https://github.com/lineofflight/frankfurter/blob/main/LICENSE"
+      }
+      servers: [
+        {
+          url: "https://api.frankfurter.dev/v2"
+        }
+      ]
+      summary: "Frankfurter is an open-source API for current and historical foreign exchange rates published by central banks."
+      title: "Frankfurter API"
+      version: "2.1.1"
+      website: "https://frankfurter.dev"
+    }
+  }
+}
+

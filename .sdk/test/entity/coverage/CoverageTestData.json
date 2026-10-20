@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "coverage": {
+      "COVERAGE00": {
+        "base": "s32",
+        "end_date": "s33",
+        "providers": "s34",
+        "quotes": "s35",
+        "start_date": "s36",
+        "id": "COVERAGE00"
+      },
+      "COVERAGE01": {
+        "base": "s64",
+        "end_date": "s65",
+        "providers": "s66",
+        "quotes": "s67",
+        "start_date": "s68",
+        "id": "COVERAGE01"
+      },
+      "COVERAGE02": {
+        "base": "s96",
+        "end_date": "s97",
+        "providers": "s98",
+        "quotes": "s99",
+        "start_date": "s9a",
+        "id": "COVERAGE02"
+      }
+    }
+  },
+  "new": {
+    "coverage": {
+      "coverage_ref01": {
+        "base": "sc8",
+        "end_date": "sc9",
+        "providers": "sca",
+        "quotes": "scb",
+        "start_date": "scc"
+      }
+    }
+  },
+  "requests": {
+    "GET /coverage": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

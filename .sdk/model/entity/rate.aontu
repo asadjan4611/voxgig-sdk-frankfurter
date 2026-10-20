@@ -1,0 +1,444 @@
+# Entity: rate
+
+main: kit: entity: rate: {
+
+  alias: field: {}
+
+  fields: {
+    base: {
+      h: "Base"
+      n: "base"
+      r: true
+      sh: "Base currency or accounting unit code"
+      t: "`$STRING`"
+    }
+    date: {
+      fo: "date"
+      h: "Date"
+      n: "date"
+      r: true
+      sh: "The date of the rate"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    providers: {
+      h: "Providers"
+      n: "providers"
+      r: false
+      sh: "Per-provider rates for this pair."
+      t: "`$ARRAY`"
+    }
+    quote: {
+      h: "Quote"
+      n: "quote"
+      r: true
+      sh: "Quote currency or accounting unit code"
+      t: "`$STRING`"
+    }
+    rate: {
+      h: "Rate"
+      n: "rate"
+      r: true
+      sh: "Exchange rate value"
+      t: "`$NUMBER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    from: {
+      base: "base"
+      quote: "quote"
+    }
+    name: "id"
+    parts: [
+      "base"
+      "quote"
+    ]
+    sep: "/"
+  }
+
+  name: "rate"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /providers/{provider}/rates"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "ECB"
+                k: "param"
+                n: "provider"
+                or: "provider"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "USD"
+                k: "query"
+                n: "base"
+                or: "base"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-01-15"
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "providers"
+                k: "query"
+                n: "expand"
+                or: "expand"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-01-01"
+                k: "query"
+                n: "from"
+                or: "from"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "month"
+                k: "query"
+                n: "group"
+                or: "group"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "USD,GBP,JPY"
+                k: "query"
+                n: "quote"
+                or: "quotes"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-01-31"
+                k: "query"
+                n: "to"
+                or: "to"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/providers/{provider}/rates"
+          q: {
+            exist: [
+              "provider"
+            ]
+          }
+          rs: {
+            alternatives: [
+              {
+                binary: true
+                kind: "raw"
+                media: "application/x-ndjson"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "providers"
+            }
+            {
+              var: "provider"
+            }
+            {
+              lit: "rates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /rates"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "USD"
+                k: "query"
+                n: "base"
+                or: "base"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-01-15"
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "providers"
+                k: "query"
+                n: "expand"
+                or: "expand"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-01-01"
+                k: "query"
+                n: "from"
+                or: "from"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "month"
+                k: "query"
+                n: "group"
+                or: "group"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "ECB,TCMB"
+                k: "query"
+                n: "provider"
+                or: "providers"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "USD,GBP,JPY"
+                k: "query"
+                n: "quote"
+                or: "quotes"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2024-01-31"
+                k: "query"
+                n: "to"
+                or: "to"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/rates"
+          rs: {
+            alternatives: [
+              {
+                binary: true
+                kind: "raw"
+                media: "application/x-ndjson"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "rates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /providers/{provider}/rate/{base}/{quote}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "EUR"
+                k: "param"
+                n: "base"
+                or: "base"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "ECB"
+                k: "param"
+                n: "provider"
+                or: "provider"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "USD"
+                k: "param"
+                n: "quote"
+                or: "quote"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "2024-01-15"
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/providers/{provider}/rate/{base}/{quote}"
+          q: {
+            exist: [
+              "base"
+              "provider"
+              "quote"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "providers"
+            }
+            {
+              var: "provider"
+            }
+            {
+              lit: "rate"
+            }
+            {
+              var: "base"
+            }
+            {
+              var: "quote"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /rate/{base}/{quote}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "EUR"
+                k: "param"
+                n: "base"
+                or: "base"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "USD"
+                k: "param"
+                n: "quote"
+                or: "quote"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "2024-01-15"
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "ECB,TCMB"
+                k: "query"
+                n: "provider"
+                or: "providers"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/rate/{base}/{quote}"
+          q: {
+            exist: [
+              "base"
+              "quote"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "rate"
+            }
+            {
+              var: "base"
+            }
+            {
+              var: "quote"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.provider")]
+    [path("$.main.kit.entity.provider")]
+  ]
+
+}

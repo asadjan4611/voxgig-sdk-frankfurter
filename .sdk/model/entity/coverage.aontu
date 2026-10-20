@@ -1,0 +1,132 @@
+# Entity: coverage
+
+main: kit: entity: coverage: {
+
+  alias: field: {}
+
+  fields: {
+    base: {
+      h: "Base"
+      n: "base"
+      r: true
+      sh: "Requested base currency, EUR by default"
+      t: "`$STRING`"
+    }
+    end_date: {
+      fo: "date"
+      h: "End Date"
+      n: "end_date"
+      r: true
+      sh: "Last eligible observation date with a nonempty matching rates query"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    providers: {
+      h: "Providers"
+      n: "providers"
+      r: true
+      sh: "Selected providers, or null for the default daily blend"
+      t: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    quotes: {
+      h: "Quotes"
+      n: "quotes"
+      r: true
+      sh: "Requested quotes, or null for all"
+      t: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    start_date: {
+      fo: "date"
+      h: "Start Date"
+      n: "start_date"
+      r: true
+      sh: "First eligible observation date with a nonempty matching rates query"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+  }
+
+  name: "coverage"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /coverage"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "USD"
+                k: "query"
+                n: "base"
+                or: "base"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "ECB,TCMB"
+                k: "query"
+                n: "provider"
+                or: "providers"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "USD,GBP,JPY"
+                k: "query"
+                n: "quote"
+                or: "quotes"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/coverage"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "coverage"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

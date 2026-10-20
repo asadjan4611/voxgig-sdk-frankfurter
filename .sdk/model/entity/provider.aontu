@@ -1,0 +1,262 @@
+# Entity: provider
+
+main: kit: entity: provider: {
+
+  alias: field: {}
+
+  fields: {
+    country_code: {
+      h: "Country Code"
+      n: "country_code"
+      r: false
+      sh: "ISO 3166-1 alpha-2 country code"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    currencies: {
+      h: "Currencies"
+      n: "currencies"
+      r: true
+      sh: "Recognised currency codes within their valid date ranges covered by this provider"
+      t: "`$ARRAY`"
+    }
+    data_url: {
+      fo: "uri"
+      h: "Data Url"
+      n: "data_url"
+      r: false
+      sh: "Link to the data source"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    end_date: {
+      fo: "date"
+      h: "End Date"
+      n: "end_date"
+      r: false
+      sh: "Latest publication coverage date; use /coverage for queryable pairs"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    frequency: {
+      h: "Frequency"
+      n: "frequency"
+      r: false
+      sh: "The period each observation stands for, after SDMX FREQ."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    key: {
+      h: "Key"
+      n: "key"
+      r: true
+      sh: "Provider identifier"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "Full provider name"
+      t: "`$STRING`"
+    }
+    pivot_currency: {
+      h: "Pivot Currency"
+      n: "pivot_currency"
+      r: false
+      sh: "Base currency for published rates"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    publish_cadence: {
+      h: "Publish Cadence"
+      n: "publish_cadence"
+      r: false
+      sh: "How often the provider publishes rates."
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    publishes_missed: {
+      h: "Publishes Missed"
+      n: "publishes_missed"
+      r: false
+      sh: "Number of expected publishes missed since end_date, in units of publish_cadence."
+      t: [
+        "`$ONE`"
+        [
+          "`$INTEGER`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    rate_type: {
+      h: "Rate Type"
+      n: "rate_type"
+      r: false
+      sh: "Official rate type as used by the source"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    start_date: {
+      fo: "date"
+      h: "Start Date"
+      n: "start_date"
+      r: false
+      sh: "Earliest publication coverage date; use /coverage for queryable pairs"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    terms_url: {
+      fo: "uri"
+      h: "Terms Url"
+      n: "terms_url"
+      r: false
+      sh: "Link to terms of use"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    unknown_currencies: {
+      h: "Unknown Currencies"
+      n: "unknown_currencies"
+      r: false
+      sh: "Unreviewed published codes absent from the currency registry."
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "provider"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /providers"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/providers"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "providers"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /providers/{provider}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "ECB"
+                k: "param"
+                n: "id"
+                or: "provider"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/providers/{provider}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              provider: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "providers"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

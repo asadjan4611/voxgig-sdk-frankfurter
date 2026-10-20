@@ -1,0 +1,66 @@
+{
+  "existing": {
+    "rate": {
+      "RATE00": {
+        "base": "s3c",
+        "date": "s3d",
+        "id": "RATE00",
+        "providers": [],
+        "quote": "s40",
+        "rate": 65,
+        "provider": "PROVIDER01"
+      },
+      "RATE01": {
+        "base": "s78",
+        "date": "s79",
+        "id": "RATE01",
+        "providers": [],
+        "quote": "s7c",
+        "rate": 125,
+        "provider": "PROVIDER01"
+      },
+      "RATE02": {
+        "base": "sb4",
+        "date": "sb5",
+        "id": "RATE02",
+        "providers": [],
+        "quote": "sb8",
+        "rate": 185,
+        "provider": "PROVIDER01"
+      }
+    }
+  },
+  "new": {
+    "rate": {
+      "rate_ref01": {
+        "base": "sf0",
+        "date": "sf1",
+        "providers": [],
+        "quote": "sf4",
+        "rate": 245
+      }
+    }
+  },
+  "requests": {
+    "GET /providers/{provider}/rates": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /rates": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /providers/{provider}/rate/{base}/{quote}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /rate/{base}/{quote}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

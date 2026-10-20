@@ -1,0 +1,1725 @@
+{
+  "NAME": "FRANKFURTER",
+  "Name": "Frankfurter",
+  "def": "frankfurter-openapi.json",
+  "main": {
+    "api": {
+      "entity": {},
+      "guide": {}
+    },
+    "custom": {
+      "plurals": {}
+    },
+    "def": {
+      "desc": ""
+    },
+    "kit": {
+      "author": {
+        "name": "Muhammad Asad",
+        "url": "https://github.com/asadjan4611"
+      },
+      "config": {
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ],
+        "headers": {
+          "content-type": "application/json"
+        },
+        "repr": "auto"
+      },
+      "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "github-pages": {
+            "active": false,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "github-pages",
+            "name": "github-pages",
+            "origname": "",
+            "output": {
+              "path": "docs"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          },
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
+      "entity": {
+        "coverage": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "base": {
+              "a": true,
+              "h": "Base",
+              "n": "base",
+              "r": true,
+              "sh": "Requested base currency, EUR by default",
+              "t": "`$STRING`"
+            },
+            "end_date": {
+              "a": true,
+              "fo": "date",
+              "h": "End Date",
+              "n": "end_date",
+              "r": true,
+              "sh": "Last eligible observation date with a nonempty matching rates query",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "providers": {
+              "a": true,
+              "h": "Providers",
+              "n": "providers",
+              "r": true,
+              "sh": "Selected providers, or null for the default daily blend",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$ARRAY`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "quotes": {
+              "a": true,
+              "h": "Quotes",
+              "n": "quotes",
+              "r": true,
+              "sh": "Requested quotes, or null for all",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$ARRAY`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "start_date": {
+              "a": true,
+              "fo": "date",
+              "h": "Start Date",
+              "n": "start_date",
+              "r": true,
+              "sh": "First eligible observation date with a nonempty matching rates query",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            }
+          },
+          "name": "coverage",
+          "op": {
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /coverage",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "query": [
+                      {
+                        "a": true,
+                        "ex": "USD",
+                        "k": "query",
+                        "n": "base",
+                        "or": "base",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "ECB,TCMB",
+                        "k": "query",
+                        "n": "provider",
+                        "or": "providers",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "USD,GBP,JPY",
+                        "k": "query",
+                        "n": "quote",
+                        "or": "quotes",
+                        "r": false,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/coverage",
+                  "q": {},
+                  "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "coverage"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "currency": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "end_date": {
+              "a": true,
+              "fo": "date",
+              "h": "End Date",
+              "n": "end_date",
+              "r": false,
+              "sh": "Latest publication coverage date; use /coverage for queryable pairs",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "iso_code": {
+              "a": true,
+              "h": "Iso Code",
+              "n": "iso_code",
+              "r": true,
+              "sh": "Currency or accounting unit code",
+              "t": "`$STRING`"
+            },
+            "iso_numeric": {
+              "a": true,
+              "h": "Iso Numeric",
+              "n": "iso_numeric",
+              "r": false,
+              "sh": "ISO 4217 numeric code",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "sh": "Full currency name",
+              "t": "`$STRING`"
+            },
+            "peg": {
+              "a": true,
+              "h": "Peg",
+              "n": "peg",
+              "r": false,
+              "sh": "Peg metadata, present only for pegged currencies",
+              "t": "`$OBJECT`"
+            },
+            "providers": {
+              "a": true,
+              "h": "Providers",
+              "n": "providers",
+              "r": false,
+              "sh": "Provider keys that publish this currency",
+              "t": "`$ARRAY`"
+            },
+            "start_date": {
+              "a": true,
+              "fo": "date",
+              "h": "Start Date",
+              "n": "start_date",
+              "r": false,
+              "sh": "Earliest publication coverage date; use /coverage for queryable pairs",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "symbol": {
+              "a": true,
+              "h": "Symbol",
+              "n": "symbol",
+              "r": false,
+              "sh": "Currency symbol",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            }
+          },
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "currency",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /currencies",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "query": [
+                      {
+                        "a": true,
+                        "ex": "ECB,TCMB",
+                        "k": "query",
+                        "n": "provider",
+                        "or": "providers",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "scope",
+                        "or": "scope",
+                        "r": false,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/currencies",
+                  "q": {},
+                  "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "currencies"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            },
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /currency/{code}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "USD",
+                        "k": "param",
+                        "n": "id",
+                        "or": "code",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/currency/{code}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "code": "id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "currency"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "provider": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "country_code": {
+              "a": true,
+              "h": "Country Code",
+              "n": "country_code",
+              "r": false,
+              "sh": "ISO 3166-1 alpha-2 country code",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "currencies": {
+              "a": true,
+              "h": "Currencies",
+              "n": "currencies",
+              "r": true,
+              "sh": "Recognised currency codes within their valid date ranges covered by this provider",
+              "t": "`$ARRAY`"
+            },
+            "data_url": {
+              "a": true,
+              "fo": "uri",
+              "h": "Data Url",
+              "n": "data_url",
+              "r": false,
+              "sh": "Link to the data source",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "end_date": {
+              "a": true,
+              "fo": "date",
+              "h": "End Date",
+              "n": "end_date",
+              "r": false,
+              "sh": "Latest publication coverage date; use /coverage for queryable pairs",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "frequency": {
+              "a": true,
+              "h": "Frequency",
+              "n": "frequency",
+              "r": false,
+              "sh": "The period each observation stands for, after SDMX FREQ.",
+              "t": "`$STRING`"
+            },
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "key": {
+              "a": true,
+              "h": "Key",
+              "n": "key",
+              "r": true,
+              "sh": "Provider identifier",
+              "t": "`$STRING`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "sh": "Full provider name",
+              "t": "`$STRING`"
+            },
+            "pivot_currency": {
+              "a": true,
+              "h": "Pivot Currency",
+              "n": "pivot_currency",
+              "r": false,
+              "sh": "Base currency for published rates",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "publish_cadence": {
+              "a": true,
+              "h": "Publish Cadence",
+              "n": "publish_cadence",
+              "r": false,
+              "sh": "How often the provider publishes rates.",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "publishes_missed": {
+              "a": true,
+              "h": "Publishes Missed",
+              "n": "publishes_missed",
+              "r": false,
+              "sh": "Number of expected publishes missed since end_date, in units of publish_cadence.",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$INTEGER`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "rate_type": {
+              "a": true,
+              "h": "Rate Type",
+              "n": "rate_type",
+              "r": false,
+              "sh": "Official rate type as used by the source",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "start_date": {
+              "a": true,
+              "fo": "date",
+              "h": "Start Date",
+              "n": "start_date",
+              "r": false,
+              "sh": "Earliest publication coverage date; use /coverage for queryable pairs",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "terms_url": {
+              "a": true,
+              "fo": "uri",
+              "h": "Terms Url",
+              "n": "terms_url",
+              "r": false,
+              "sh": "Link to terms of use",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "unknown_currencies": {
+              "a": true,
+              "h": "Unknown Currencies",
+              "n": "unknown_currencies",
+              "r": false,
+              "sh": "Unreviewed published codes absent from the currency registry.",
+              "t": "`$ARRAY`"
+            }
+          },
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "provider",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /providers",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/providers",
+                  "q": {},
+                  "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "providers"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            },
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /providers/{provider}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "ECB",
+                        "k": "param",
+                        "n": "id",
+                        "or": "provider",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/providers/{provider}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "provider": "id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "providers"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "rate": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "base": {
+              "a": true,
+              "h": "Base",
+              "n": "base",
+              "r": true,
+              "sh": "Base currency or accounting unit code",
+              "t": "`$STRING`"
+            },
+            "date": {
+              "a": true,
+              "fo": "date",
+              "h": "Date",
+              "n": "date",
+              "r": true,
+              "sh": "The date of the rate",
+              "t": "`$STRING`"
+            },
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "providers": {
+              "a": true,
+              "h": "Providers",
+              "n": "providers",
+              "r": false,
+              "sh": "Per-provider rates for this pair.",
+              "t": "`$ARRAY`"
+            },
+            "quote": {
+              "a": true,
+              "h": "Quote",
+              "n": "quote",
+              "r": true,
+              "sh": "Quote currency or accounting unit code",
+              "t": "`$STRING`"
+            },
+            "rate": {
+              "a": true,
+              "h": "Rate",
+              "n": "rate",
+              "r": true,
+              "sh": "Exchange rate value",
+              "t": "`$NUMBER`"
+            }
+          },
+          "id": {
+            "field": "id",
+            "from": {
+              "base": "base",
+              "quote": "quote"
+            },
+            "name": "id",
+            "parts": [
+              "base",
+              "quote"
+            ],
+            "sep": "/"
+          },
+          "name": "rate",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /providers/{provider}/rates",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "ECB",
+                        "k": "param",
+                        "n": "provider",
+                        "or": "provider",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ],
+                    "query": [
+                      {
+                        "a": true,
+                        "ex": "USD",
+                        "k": "query",
+                        "n": "base",
+                        "or": "base",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "2024-01-15",
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "providers",
+                        "k": "query",
+                        "n": "expand",
+                        "or": "expand",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "2024-01-01",
+                        "k": "query",
+                        "n": "from",
+                        "or": "from",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "month",
+                        "k": "query",
+                        "n": "group",
+                        "or": "group",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "USD,GBP,JPY",
+                        "k": "query",
+                        "n": "quote",
+                        "or": "quotes",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "2024-01-31",
+                        "k": "query",
+                        "n": "to",
+                        "or": "to",
+                        "r": false,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/providers/{provider}/rates",
+                  "q": {
+                    "exist": [
+                      "provider"
+                    ]
+                  },
+                  "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "application/x-ndjson"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "providers"
+                    },
+                    {
+                      "var": "provider"
+                    },
+                    {
+                      "lit": "rates"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /rates",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "query": [
+                      {
+                        "a": true,
+                        "ex": "USD",
+                        "k": "query",
+                        "n": "base",
+                        "or": "base",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "2024-01-15",
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "providers",
+                        "k": "query",
+                        "n": "expand",
+                        "or": "expand",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "2024-01-01",
+                        "k": "query",
+                        "n": "from",
+                        "or": "from",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "month",
+                        "k": "query",
+                        "n": "group",
+                        "or": "group",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "ECB,TCMB",
+                        "k": "query",
+                        "n": "provider",
+                        "or": "providers",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "USD,GBP,JPY",
+                        "k": "query",
+                        "n": "quote",
+                        "or": "quotes",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "2024-01-31",
+                        "k": "query",
+                        "n": "to",
+                        "or": "to",
+                        "r": false,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/rates",
+                  "q": {},
+                  "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "application/x-ndjson"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "rates"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            },
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /providers/{provider}/rate/{base}/{quote}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "EUR",
+                        "k": "param",
+                        "n": "base",
+                        "or": "base",
+                        "r": true,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "ECB",
+                        "k": "param",
+                        "n": "provider",
+                        "or": "provider",
+                        "r": true,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "USD",
+                        "k": "param",
+                        "n": "quote",
+                        "or": "quote",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ],
+                    "query": [
+                      {
+                        "a": true,
+                        "ex": "2024-01-15",
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/providers/{provider}/rate/{base}/{quote}",
+                  "q": {
+                    "exist": [
+                      "base",
+                      "provider",
+                      "quote"
+                    ]
+                  },
+                  "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "providers"
+                    },
+                    {
+                      "var": "provider"
+                    },
+                    {
+                      "lit": "rate"
+                    },
+                    {
+                      "var": "base"
+                    },
+                    {
+                      "var": "quote"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /rate/{base}/{quote}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "EUR",
+                        "k": "param",
+                        "n": "base",
+                        "or": "base",
+                        "r": true,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "USD",
+                        "k": "param",
+                        "n": "quote",
+                        "or": "quote",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ],
+                    "query": [
+                      {
+                        "a": true,
+                        "ex": "2024-01-15",
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": "ECB,TCMB",
+                        "k": "query",
+                        "n": "provider",
+                        "or": "providers",
+                        "r": false,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/rate/{base}/{quote}",
+                  "q": {
+                    "exist": [
+                      "base",
+                      "quote"
+                    ]
+                  },
+                  "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "rate"
+                    },
+                    {
+                      "var": "base"
+                    },
+                    {
+                      "var": "quote"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "$.main.kit.entity.provider"
+              ],
+              [
+                "$.main.kit.entity.provider"
+              ]
+            ]
+          }
+        }
+      },
+      "feature": {
+        "test": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
+          },
+          "description": "In-memory mock transport for testing without a live server",
+          "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": true,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": true,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PrePoint": {
+              "active": true,
+              "await": false
+            },
+            "PreRequest": {
+              "active": true,
+              "await": false
+            },
+            "PreResponse": {
+              "active": true,
+              "await": false
+            },
+            "PreResult": {
+              "active": true,
+              "await": false
+            },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
+              "await": false
+            }
+          },
+          "name": "test",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Test transport",
+          "transport": "base",
+          "version": "0.0.1"
+        }
+      },
+      "flow": {
+        "BasicCoverageFlow": {
+          "active": true,
+          "entity": "coverage",
+          "key$": "BasicCoverageFlow",
+          "kind": "basic",
+          "name": "BasicCoverageFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "coverage_ref01",
+                "srcdatavar": "coverage_ref01_data",
+                "suffix": "_dt0"
+              },
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-coverage_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicCurrencyFlow": {
+          "active": true,
+          "entity": "currency",
+          "key$": "BasicCurrencyFlow",
+          "kind": "basic",
+          "name": "BasicCurrencyFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "currency_ref01"
+                  }
+                }
+              ]
+            },
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "currency_ref01",
+                "srcdatavar": "currency_ref01_data",
+                "suffix": "_dt0"
+              },
+              "m": {
+                "id": "currency01"
+              },
+              "o": "load",
+              "s": [],
+              "v": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-currency_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicProviderFlow": {
+          "active": true,
+          "entity": "provider",
+          "key$": "BasicProviderFlow",
+          "kind": "basic",
+          "name": "BasicProviderFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "provider_ref01"
+                  }
+                }
+              ]
+            },
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "provider_ref01",
+                "srcdatavar": "provider_ref01_data",
+                "suffix": "_dt0"
+              },
+              "m": {
+                "id": "provider01"
+              },
+              "o": "load",
+              "s": [],
+              "v": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-provider_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicRateFlow": {
+          "active": true,
+          "entity": "rate",
+          "key$": "BasicRateFlow",
+          "kind": "basic",
+          "name": "BasicRateFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "rate_ref01"
+                  }
+                }
+              ]
+            },
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "rate_ref01",
+                "srcdatavar": "rate_ref01_data",
+                "suffix": "_dt0"
+              },
+              "m": {
+                "base": "base01",
+                "id": "rate01"
+              },
+              "o": "load",
+              "s": [],
+              "v": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-rate_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "info": {
+        "auth": false,
+        "contact": {
+          "url": "https://github.com/lineofflight/frankfurter/issues"
+        },
+        "description": "Frankfurter is an open-source API for current and historical foreign exchange rates published by central banks.",
+        "license": {
+          "name": "MIT",
+          "url": "https://github.com/lineofflight/frankfurter/blob/main/LICENSE"
+        },
+        "servers": [
+          {
+            "url": "https://api.frankfurter.dev/v2"
+          }
+        ],
+        "summary": "Frankfurter is an open-source API for current and historical foreign exchange rates published by central banks.",
+        "title": "Frankfurter API",
+        "version": "2.1.1",
+        "website": "https://frankfurter.dev"
+      },
+      "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "in": "",
+          "name": "",
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
+      "phase": {
+        "build": {
+          "active": true
+        },
+        "top": {
+          "active": true
+        }
+      },
+      "publisher": {
+        "name": "Muhammad Asad",
+        "security": "",
+        "url": "https://github.com/asadjan4611"
+      },
+      "repo": {
+        "host": "github.com",
+        "path": "asadjan4611/voxgig-sdk-frankfurter"
+      },
+      "target": {
+        "ts": {
+          "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
+          "module": {
+            "goversion": "",
+            "name": "frankfurter",
+            "package": "",
+            "path": ""
+          },
+          "name": "ts",
+          "origname": "",
+          "output": {
+            "adopt": false,
+            "create": true,
+            "path": "",
+            "repo": "",
+            "root": false,
+            "sdkrel": ""
+          },
+          "package": "@voxgig/sdkgen",
+          "provides": {
+            "schema": true,
+            "sekreto": true
+          },
+          "publish": {
+            "registry": {
+              "active": false,
+              "name": "npm",
+              "package": "voxgig-sdk-frankfurter",
+              "state": "pending",
+              "url": "https://registry.npmjs.org",
+              "vault": {
+                "alias": "npm",
+                "env": "",
+                "recipe": "npm"
+              }
+            },
+            "tag": {
+              "active": true,
+              "prefix": "",
+              "vault": {
+                "alias": "github",
+                "recipe": "github"
+              },
+              "via": "port"
+            },
+            "version": "0.0.1"
+          },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
+          "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": true
+        }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "https://frankfurter.dev/",
+        "entity_desc": {},
+        "homepage": "https://frankfurter.dev/",
+        "meta_source": "https://api.frankfurter.dev/v2/openapi.json",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": "https://frankfurter.dev/"
+      }
+    }
+  },
+  "name": "frankfurter",
+  "name-": "frankfurter",
+  "name_": "frankfurter",
+  "name__orig": "frankfurter",
+  "origin": "voxgig-sdk"
+}

@@ -1,0 +1,38 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Available currencies",
+      "Available providers",
+      "Base currency or accounting unit code",
+      "Coverage of the selected rate query",
+      "Currency details",
+      "Currency or accounting unit code",
+      "Exchange rate",
+      "Exchange rate value",
+      "Exchange rates",
+      "First eligible observation date with a nonempty matching rates query",
+      "Frankfurter is an open-source API for current and historical foreign exchange rates published by central banks.",
+      "Full currency name",
+      "ISO 3166-1 alpha-2 country code",
+      "ISO 4217 numeric code",
+      "Last eligible observation date with a nonempty matching rates query",
+      "Latest publication coverage date; use /coverage for queryable pairs",
+      "Link to the data source",
+      "Peg metadata, present only for pegged currencies",
+      "Per-provider rates for this pair. Present only when `expand=providers` is set. Each entry has the provider&#39;s observation date and published rate (rebased to the row&#39;s base). Entries with `excluded: true` did not contribute to the blended `rate` , either flagged as outliers by the consensus filter, or overridden by a currency peg. A one-day typo in a provider&#39;s series is left out, so its entry shows the observation before it. Omitted on synthesized peg rows where no provider published the quote.",
+      "Provider",
+      "Quote currency or accounting unit code",
+      "Recognised currency codes within their valid date ranges covered by this provider",
+      "Requested base currency, EUR by default",
+      "Requested quotes, or null for all",
+      "Selected providers, or null for the default daily blend",
+      "The date of the rate",
+      "The period each observation stands for, after SDMX FREQ. A daily value is dated on the day observed. A monthly or quarterly value is dated on the day it takes effect and stands for the period until the next one. Values coarser than daily never enter the blend: query them by provider."
+    ]
+  }
+}

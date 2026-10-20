@@ -1,0 +1,6 @@
+# Flows
+
+@"./BasicCoverageFlow.aontu"
+@"./BasicCurrencyFlow.aontu"
+@"./BasicProviderFlow.aontu"
+@"./BasicRateFlow.aontu"

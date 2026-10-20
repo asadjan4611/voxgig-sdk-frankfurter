@@ -1,0 +1,52 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 4
+  metrics: count: path: 9
+  metrics: count: method: 9
+
+  entity: coverage: {
+    path: "/coverage": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: currency: {
+    path: "/currencies": {
+      op: list: method: *GET
+    }
+    path: "/currency/{code}": {
+      rename: param: "code": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: provider: {
+    path: "/providers": {
+      op: list: method: *GET
+    }
+    path: "/providers/{provider}": {
+      rename: param: "provider": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: rate: {
+    path: "/providers/{provider}/rate/{base}/{quote}": {
+      op: load: method: *GET
+    }
+    path: "/providers/{provider}/rates": {
+      op: list: method: *GET
+    }
+    path: "/rate/{base}/{quote}": {
+      op: load: method: *GET
+    }
+    path: "/rates": {
+      op: list: method: *GET
+    }
+  }
+
+}

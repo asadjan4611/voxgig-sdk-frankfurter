@@ -1,0 +1,28 @@
+# BasicCoverageFlow
+
+main: kit: flow: BasicCoverageFlow:
+{
+  entity: "coverage",
+  kind: "basic",
+  name: "BasicCoverageFlow",
+  step: [
+    {
+      i: {
+        ref: "coverage_ref01",
+        srcdatavar: "coverage_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-coverage_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCoverageFlow"
+}
