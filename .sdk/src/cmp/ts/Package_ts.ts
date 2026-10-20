@@ -80,7 +80,8 @@ const Package = cmp(async function Package(props: any) {
     scripts: {
       ...(hasLiveScenarios(model) ? {
         'test:live': 'npm run build && node ' +
-          npmScriptEnv(envName(model) + '_TEST_LIVE', 'TRUE') + ' --test dist-test/live.test.js',
+          npmScriptEnv(envName(model) + '_TEST_LIVE', 'TRUE') +
+          ' --test-concurrency=1 --test "dist-test/live*.test.js"',
       } : {}),
 
       'pretest': 'npm run build',

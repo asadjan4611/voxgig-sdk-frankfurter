@@ -35,5 +35,20 @@ test('live operation coverage', { skip: process.env.${envName(model)}_TEST_LIVE 
   await runLiveScenarios(SDK, ${JSON.stringify(plan, null, 2)}, '${envName(model)}', { server: { ${server} }, secret: process.env.${envName(model)}_SECRET }, { strict: ${liveStrict(model, props.target.name)}, t })
 })
 `))
+  File({ name: 'live-errors.test.ts' }, () => Content(`import assert from 'node:assert/strict'
+import { test } from 'node:test'
+import { SDK } from '..'
+
+test('live invalid currency returns a client error', { skip: process.env.${envName(model)}_TEST_LIVE !== 'TRUE' }, async () => {
+  const result = await new SDK().direct({
+    path: '/currency/{code}',
+    method: 'GET',
+    params: { code: 'NOT_A_CURRENCY' },
+  })
+  assert.equal(result.ok, false)
+  assert.equal(typeof result.status, 'number')
+  assert((result.status ?? 0) >= 400 && (result.status ?? 0) < 500)
+})
+`))
 })
 export { TestLive }

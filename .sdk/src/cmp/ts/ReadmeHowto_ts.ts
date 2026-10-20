@@ -59,9 +59,9 @@ const ReadmeHowto = cmp(function ReadmeHowto(props: any) {
   // The op-driven example lines, shown only when the SDK has an entity op.
   // A direct()-only SDK (no ops anywhere) shows a direct() test call instead.
   const testModeExample = 'list' === primaryOp
-    ? `const ${eVar}s = await client.${eName}().list(${testCallArg})
-// ${eVar}s is an array of ${eName} entities, one per mock record
-console.log(${eVar}s.map((${eVar}) => ${eVar}.data()))`
+    ? `const ${eVar}List = await client.${eName}().list(${testCallArg})
+// ${eVar}List is an array of ${eName} entities, one per mock record
+console.log(${eVar}List.map((${eVar}) => ${eVar}.data()))`
     : primaryOp
     ? `const ${eVar} = await client.${eName}().${primaryOp}(${testCallArg})
 // ${eVar} is the ${eName} entity; .data() reads its mock record
@@ -105,9 +105,8 @@ For endpoints not covered by entity methods:
 
 \`\`\`ts
 const result = await client.direct({
-  path: '/api/resource/{id}',
+  path: '/currencies',
   method: 'GET',
-  params: { id: 'example' },
 })
 
 if (result.ok) {
@@ -120,9 +119,8 @@ if (result.ok) {
 
 \`\`\`ts
 const fetchdef = await client.prepare({
-  path: '/api/resource/{id}',
-  method: 'DELETE',
-  params: { id: 'example' },
+  path: '/currencies',
+  method: 'GET',
 })
 
 // Inspect before sending
@@ -171,22 +169,16 @@ const client = new ${model.const.Name}SDK({${apikeyExtendField}
 
 ### Run live tests
 
-Create a \`.env.local\` file at the project root:
-
-\`\`\`
-${envName(model)}_TEST_LIVE=TRUE${apikeyEnvLine}
-\`\`\`
-
-Then run:
+Live tests are opt-in and separate from the offline suite. Run:
 
 \`\`\`bash
-cd ts && npm test
+cd ts && npm run test:live
 \`\`\`
 
-Live entity tests continue independent operations after errors and attempt
-supported cleanup. Their final result reports failures and missing prerequisites
-after the remaining work completes. The model and test inputs determine which
-API operations the generated scenarios cover.
+This sets \`${envName(model)}_TEST_LIVE=TRUE\` for the dedicated live process.
+The normal \`npm test\` command remains fully offline. The live suite checks
+all nine documented GET operations plus one invalid-currency response; it does
+not claim exhaustive coverage of every optional-parameter combination.
 
 `)
 

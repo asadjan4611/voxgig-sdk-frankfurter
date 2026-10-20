@@ -34,7 +34,7 @@ import { FrankfurterSDK } from 'voxgig-sdk-frankfurter'
 const client = new FrankfurterSDK()
 ```
 
-### 3. Load a rate
+### 2. Load a rate
 
 Rate is nested under base, so provide the `base`.
 `load()` returns the entity and throws on failure; `.data()` reads its record:
@@ -42,8 +42,8 @@ Rate is nested under base, so provide the `base`.
 ```ts
 try {
   const rate = await client.Rate().load({
-    base: 'example_base',
-    quote: 'example_quote',
+    base: 'EUR',
+    quote: 'USD',
   })
   console.log(rate.data())
 } catch (err) {
@@ -58,8 +58,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const currencys = await client.Currency().list()
-  console.log(currencys.map((item) => item.data()))
+  const currencyList = await client.Currency().list()
+  console.log(currencyList.map((item) => item.data()))
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -67,13 +67,13 @@ try {
 
 The low-level `direct()` method does **not** throw — it returns the
 result envelope. Branch on `ok`; on failure `status` holds the HTTP status
-(for error responses) and `err` holds the error:
+and `err` holds a transport error:
 
 ```ts
 const result = await client.direct({
-  path: '/api/resource/{id}',
+  path: '/currency/{code}',
   method: 'GET',
-  params: { id: 'example_id' },
+  params: { code: 'NOT_A_CURRENCY' },
 })
 
 if (!result.ok) {
@@ -90,9 +90,8 @@ For endpoints not covered by entity methods:
 
 ```ts
 const result = await client.direct({
-  path: '/api/resource/{id}',
+  path: '/currencies',
   method: 'GET',
-  params: { id: 'example' },
 })
 
 if (result.ok) {
@@ -105,9 +104,8 @@ if (result.ok) {
 
 ```ts
 const fetchdef = await client.prepare({
-  path: '/api/resource/{id}',
-  method: 'DELETE',
-  params: { id: 'example' },
+  path: '/currencies',
+  method: 'GET',
 })
 
 // Inspect before sending
@@ -123,9 +121,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FrankfurterSDK.test()
 
-const currencys = await client.Currency().list()
-// currencys is an array of Currency entities, one per mock record
-console.log(currencys.map((currency) => currency.data()))
+const currencyList = await client.Currency().list()
+// currencyList is an array of Currency entities, one per mock record
+console.log(currencyList.map((currency) => currency.data()))
 ```
 
 You can also use the instance method:
@@ -173,22 +171,16 @@ const client = new FrankfurterSDK({
 
 ### Run live tests
 
-Create a `.env.local` file at the project root:
-
-```
-FRANKFURTER_TEST_LIVE=TRUE
-```
-
-Then run:
+Live tests are opt-in and separate from the offline suite. Run:
 
 ```bash
-cd ts && npm test
+cd ts && npm run test:live
 ```
 
-Live entity tests continue independent operations after errors and attempt
-supported cleanup. Their final result reports failures and missing prerequisites
-after the remaining work completes. The model and test inputs determine which
-API operations the generated scenarios cover.
+This sets `FRANKFURTER_TEST_LIVE=TRUE` for the dedicated live process.
+The normal `npm test` command remains fully offline. The live suite checks
+all nine documented GET operations plus one invalid-currency response; it does
+not claim exhaustive coverage of every optional-parameter combination.
 
 
 ## Reference
@@ -425,13 +417,13 @@ Create an instance: `const currency = client.Currency()`
 #### Example: Load
 
 ```ts
-const currency = await client.Currency().load({ id: 'currency_id' })
+const currency = await client.Currency().load({ id: 'USD' })
 ```
 
 #### Example: List
 
 ```ts
-const currencys = await client.Currency().list()
+const currencyList = await client.Currency().list()
 ```
 
 
@@ -469,13 +461,13 @@ Create an instance: `const provider = client.Provider()`
 #### Example: Load
 
 ```ts
-const provider = await client.Provider().load({ id: 'provider_id' })
+const provider = await client.Provider().load({ id: 'ECB' })
 ```
 
 #### Example: List
 
 ```ts
-const providers = await client.Provider().list()
+const providerList = await client.Provider().list()
 ```
 
 
@@ -504,13 +496,13 @@ Create an instance: `const rate = client.Rate()`
 #### Example: Load
 
 ```ts
-const rate = await client.Rate().load({ base: 'base', quote: 'quote' })
+const rate = await client.Rate().load({ base: 'EUR', quote: 'USD' })
 ```
 
 #### Example: List
 
 ```ts
-const rates = await client.Rate().list()
+const rateList = await client.Rate().list()
 ```
 
 ## Features

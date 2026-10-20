@@ -61,7 +61,7 @@ const client = ${model.const.Name}SDK.test({
     const eName = nom(exampleEntity, 'Name')
     // A list() result is an array — name the variable accordingly.
     const eVar = exampleVarName(eName.toLowerCase(), 'ts') +
-      ('list' === primaryOp ? 's' : '')
+      ('list' === primaryOp ? 'List' : '')
     const primaryOpDef = exampleEntity.op && exampleEntity.op[primaryOp]
     let arg = ''
     const isMatchOp = 'load' === primaryOp || 'remove' === primaryOp

@@ -104,7 +104,7 @@ const utility_1 = require("../../utility");
 // fails the test.
 // An account with no record for a test to read skips it either way.
 const LIVE_STRICT = true;
-function liveScenariosActive() { return false && process.env.FRANKFURTER_TEST_LIVE === 'TRUE'; }
+function liveScenariosActive() { return true && process.env.FRANKFURTER_TEST_LIVE === 'TRUE'; }
 function directSetup(mockres) {
     const calls = [];
     const env = (0, utility_1.envOverride)({

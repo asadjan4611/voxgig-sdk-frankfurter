@@ -185,6 +185,7 @@ main: kit: entity: provider: {
             source: "openapi3"
             version: 2
           }
+          li: true
           m: "GET"
           o: "/providers"
           rs: {
@@ -224,6 +225,7 @@ main: kit: entity: provider: {
               }
             ]
           }
+          li: true
           m: "GET"
           o: "/providers/{provider}"
           q: {

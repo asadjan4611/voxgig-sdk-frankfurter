@@ -14,6 +14,7 @@ import { TestDirect } from './TestDirect_ts'
 import { TestEntity } from './TestEntity_ts'
 import { ReadmeExampleTest } from './ReadmeExampleTest_ts'
 import { ReadmeExamplesTest } from './ReadmeExamplesTest_ts'
+import { TestQuality } from './TestQuality_ts'
 
 
 const Test = cmp(function Test(props: any) {
@@ -27,6 +28,7 @@ const Test = cmp(function Test(props: any) {
     TestLive({ target })
     TestDefinition({ target })
     TestClean({ target })
+    TestQuality({ target })
 
     ReadmeExampleTest({ target })
     ReadmeExamplesTest({ target })

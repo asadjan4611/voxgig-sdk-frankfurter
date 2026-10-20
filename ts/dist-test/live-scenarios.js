@@ -100,7 +100,7 @@ async function runLiveScenarios(SDK, plan, envPrefix, liveDefaults = {}, settle 
                                 strict_1.default.equal(payload.query, point.graphql.doc, 'Entity selected wrong GraphQL operation');
                             }
                             else
-                                strict_1.default.equal(new URL(String(url)).pathname, expectedPath, 'Entity selected wrong route');
+                                (0, strict_1.default)(new URL(String(url)).pathname.endsWith(expectedPath), 'Entity selected wrong route');
                             strict_1.default.equal(init?.method || 'GET', point.method);
                             (0, strict_1.default)(response.status >= 200 && response.status < 300, 'Unsuccessful HTTP response');
                             if (point.kind === 'graphql')

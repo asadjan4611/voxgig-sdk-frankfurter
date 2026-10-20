@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "target": "ts",
+  "scenarios": "supported",
+  "points": [
+    "GET /coverage",
+    "GET /currencies",
+    "GET /currency/{code}",
+    "GET /providers",
+    "GET /providers/{provider}",
+    "GET /providers/{provider}/rates",
+    "GET /rates",
+    "GET /providers/{provider}/rate/{base}/{quote}",
+    "GET /rate/{base}/{quote}"
+  ]
+}

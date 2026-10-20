@@ -17,6 +17,7 @@
       "url": "https://api.frankfurter.dev/v2"
     }
   ],
+  "security": [],
   "paths": {
     "/coverage": {
       "get": {
@@ -358,6 +359,9 @@
                 ]
               }
             }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -558,7 +562,7 @@
           },
           "frequency": {
           "type": "string",
-          "enum": ["daily", "monthly", "quarterly"],
+          "enum": ["daily", "weekly", "monthly", "quarterly"],
           "description": "The period each observation stands for, after SDMX FREQ. A daily value is dated on the day observed. A monthly or quarterly value is dated on the day it takes effect and stands for the period until the next one. Values coarser than daily never enter the blend: query them by provider."
         },
         "publishes_missed": {

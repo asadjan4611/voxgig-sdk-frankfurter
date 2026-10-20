@@ -130,6 +130,7 @@ main: kit: entity: currency: {
               }
             ]
           }
+          li: true
           m: "GET"
           o: "/currencies"
           rs: {
@@ -169,6 +170,7 @@ main: kit: entity: currency: {
               }
             ]
           }
+          li: true
           m: "GET"
           o: "/currency/{code}"
           q: {

@@ -94,6 +94,7 @@ declare class Config {
                             })[];
                         };
                         select: {};
+                        live: boolean;
                         response: {
                             kind: string;
                             media: string;
@@ -180,6 +181,7 @@ declare class Config {
                             })[];
                         };
                         select: {};
+                        live: boolean;
                         response: {
                             kind: string;
                             media: string;
@@ -223,6 +225,7 @@ declare class Config {
                         select: {
                             exist: string[];
                         };
+                        live: boolean;
                         response: {
                             kind: string;
                             media: string;
@@ -295,6 +298,7 @@ declare class Config {
                         };
                         args: {};
                         select: {};
+                        live: boolean;
                         response: {
                             kind: string;
                             media: string;
@@ -338,6 +342,7 @@ declare class Config {
                         select: {
                             exist: string[];
                         };
+                        live: boolean;
                         response: {
                             kind: string;
                             media: string;
@@ -439,6 +444,7 @@ declare class Config {
                         select: {
                             exist: string[];
                         };
+                        live: boolean;
                         response: {
                             alternatives: {
                                 binary: boolean;
@@ -482,6 +488,7 @@ declare class Config {
                         select: {
                             exist?: undefined;
                         };
+                        live: boolean;
                         response: {
                             alternatives: {
                                 binary: boolean;
@@ -541,6 +548,7 @@ declare class Config {
                         select: {
                             exist: string[];
                         };
+                        live: boolean;
                         response: {
                             kind: string;
                             media: string;

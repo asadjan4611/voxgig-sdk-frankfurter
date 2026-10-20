@@ -28,6 +28,7 @@
     "REFERENCE.md"
   ],
   "scripts": {
+    "test:live": "npm run build && node --import \"data:text/javascript,process.env.FRANKFURTER_TEST_LIVE='TRUE'\" --test-concurrency=1 --test \"dist-test/live*.test.js\"",
     "pretest": "npm run build",
     "test": "node --enable-source-maps --test-concurrency=1 --test \"dist-test/**/*.test.js\"",
     "test-some": "node -e \"const p = process.env.npm_config_pattern || process.env.TEST_PATTERN; const r = require('child_process').spawnSync(process.execPath, ['--enable-source-maps', '--experimental-test-isolation=none', ...(p ? ['--test-name-pattern=' + p] : []), '--test', 'dist-test/**/*.test.js'], { stdio: 'inherit' }); process.exit(r.status ?? 1)\"",

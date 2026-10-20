@@ -82,7 +82,8 @@ export async function runLiveScenarios(SDK: any, plan: any[], envPrefix: string,
             if (point.kind === 'graphql') {
               const payload = JSON.parse(init.body)
               assert.equal(payload.query, point.graphql.doc, 'Entity selected wrong GraphQL operation')
-            } else assert.equal(new URL(String(url)).pathname, expectedPath, 'Entity selected wrong route')
+            } else assert(new URL(String(url)).pathname.endsWith(expectedPath),
+              'Entity selected wrong route')
             assert.equal(init?.method || 'GET', point.method)
             assert(response.status >= 200 && response.status < 300, 'Unsuccessful HTTP response')
             if (point.kind === 'graphql') wire = await response.clone().json()

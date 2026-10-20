@@ -122,7 +122,7 @@ const ${eVar} = await client.${entity.Name}().load(${loadArg})
       Content(`#### Example: List
 
 \`\`\`ts
-const ${eVar}s = await client.${entity.Name}().list(${listMatchArg('ts', entity)})
+const ${eVar}List = await client.${entity.Name}().list(${listMatchArg('ts', entity)})
 \`\`\`
 
 `)

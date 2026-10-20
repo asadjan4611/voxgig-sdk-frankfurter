@@ -41,6 +41,13 @@ function exampleValue(entity: any, op: any, paramName: string, placeholder: stri
   // quoted placeholder and the example failed to compile against the type
   // generated from that very sentinel.
   const key = canonScalarKey(paramCanonType(entity, op, paramName))
+  const declared = op ? each(opParams(op)).find((p: any) => p && p.n === paramName) as any : undefined
+  const field = entity && entity.fields ? each(entity.fields)
+    .find((f: any) => f && f.n === paramName) as any : undefined
+  const example = declared?.ex ?? field?.ex
+  if (undefined !== example) {
+    return 'string' === typeof example ? jsQuote(example) : JSON.stringify(example)
+  }
   if ('INTEGER' === key || 'NUMBER' === key) {
     return '1'
   }

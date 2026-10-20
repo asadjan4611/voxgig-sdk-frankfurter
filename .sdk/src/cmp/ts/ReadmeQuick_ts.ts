@@ -74,9 +74,9 @@ resolves to entities, not raw records. Iterate them directly, and call
 \`.data()\` on one for the record it holds:
 
 \`\`\`ts
-const ${eVar}s = await client.${eName}().list(${listMatchArg('ts', exampleEntity)})
+const ${eVar}List = await client.${eName}().list(${listMatchArg('ts', exampleEntity)})
 
-for (const ${eVar} of ${eVar}s) {
+for (const ${eVar} of ${eVar}List) {
   console.log(${eVar}.data())
 }
 \`\`\`
@@ -101,7 +101,7 @@ for (const ${eVar} of ${eVar}s) {
         `    ${jsKey(it.name)}: ${exampleValue(nestedEntity, loadOp, it.name,
           it.name === neIdF ? 'example_id' : 'example_' + it.name)},`)
 
-      Content(`### 3. Load ${neArticle} ${neName.toLowerCase()}
+      Content(`### ${opnames.includes('list') ? 3 : 2}. Load ${neArticle} ${neName.toLowerCase()}
 
 ${neName} is nested under ${parentName}, so provide the \`${parentParam}\`.
 \`load()\` returns the entity and throws on failure; \`.data()\` reads its record:
@@ -129,7 +129,7 @@ ${neMatchLines.join('\n')}
             it.name === idF ? 'example_id' : 'example_' + it.name)}`).join(', ')} }`
         : ''
 
-      Content(`### 3. Load ${article} ${eName.toLowerCase()}
+      Content(`### ${opnames.includes('list') ? 3 : 2}. Load ${article} ${eName.toLowerCase()}
 
 \`load()\` returns the entity and throws on failure; \`.data()\` reads its record:
 

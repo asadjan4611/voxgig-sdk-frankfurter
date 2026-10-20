@@ -196,6 +196,7 @@ class Config {
                 ]
               },
               "select": {},
+              "live": true,
               "response": {
                 "kind": "json",
                 "media": "application/json"
@@ -337,6 +338,7 @@ class Config {
                 ]
               },
               "select": {},
+              "live": true,
               "response": {
                 "kind": "json",
                 "media": "application/json"
@@ -390,6 +392,7 @@ class Config {
                   "id"
                 ]
               },
+              "live": true,
               "response": {
                 "kind": "json",
                 "media": "application/json"
@@ -584,6 +587,7 @@ class Config {
               },
               "args": {},
               "select": {},
+              "live": true,
               "response": {
                 "kind": "json",
                 "media": "application/json"
@@ -637,6 +641,7 @@ class Config {
                   "id"
                 ]
               },
+              "live": true,
               "response": {
                 "kind": "json",
                 "media": "application/json"
@@ -807,6 +812,7 @@ class Config {
                   "provider"
                 ]
               },
+              "live": true,
               "response": {
                 "alternatives": [
                   {
@@ -900,6 +906,7 @@ class Config {
                 ]
               },
               "select": {},
+              "live": true,
               "response": {
                 "alternatives": [
                   {
@@ -996,6 +1003,7 @@ class Config {
                   "quote"
                 ]
               },
+              "live": true,
               "response": {
                 "kind": "json",
                 "media": "application/json"
@@ -1069,6 +1077,7 @@ class Config {
                   "quote"
                 ]
               },
+              "live": true,
               "response": {
                 "kind": "json",
                 "media": "application/json"

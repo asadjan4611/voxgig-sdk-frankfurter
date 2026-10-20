@@ -107,6 +107,7 @@ main: kit: entity: coverage: {
               }
             ]
           }
+          li: true
           m: "GET"
           o: "/coverage"
           rs: {

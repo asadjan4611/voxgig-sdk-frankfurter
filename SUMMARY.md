@@ -74,15 +74,15 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
-| Coverage | `load` | `GET /coverage` | See reference |
-| Currency | `list` | `GET /currencies` | See reference |
-| Currency | `load` | `GET /currency/{code}` | See reference |
-| Provider | `list` | `GET /providers` | See reference |
-| Provider | `load` | `GET /providers/{provider}` | See reference |
-| Rate | `list` | `GET /providers/{provider}/rates` | See reference |
-| Rate | `list` | `GET /rates` | See reference |
-| Rate | `load` | `GET /providers/{provider}/rate/{base}/{quote}` | See reference |
-| Rate | `load` | `GET /rate/{base}/{quote}` | See reference |
+| Coverage | `load` | `GET /coverage` | Not required |
+| Currency | `list` | `GET /currencies` | Not required |
+| Currency | `load` | `GET /currency/{code}` | Not required |
+| Provider | `list` | `GET /providers` | Not required |
+| Provider | `load` | `GET /providers/{provider}` | Not required |
+| Rate | `list` | `GET /providers/{provider}/rates` | Not required |
+| Rate | `list` | `GET /rates` | Not required |
+| Rate | `load` | `GET /providers/{provider}/rate/{base}/{quote}` | Not required |
+| Rate | `load` | `GET /rate/{base}/{quote}` | Not required |
 
 ## Connect to the API
 
@@ -95,6 +95,14 @@ Check authentication for the route you plan to call. A route that declares no au
 1. Choose the API server and an operation that matches your task.
 2. Check the operation’s required input and authentication. Use values valid for your account and environment.
 3. Send one request and inspect the returned data before adding retries, concurrency, or a larger batch.
+
+A read request without required parameters or authentication is `GET /coverage`. For example:
+
+```sh
+curl --fail-with-body --silent --show-error 'https://api.frankfurter.dev/v2/coverage'
+```
+
+Inspect the response using the Coverage reference. This checks the public route; authenticated operations need their own credentials and request data.
 
 For an SDK call, install or build the chosen client, create a client instance with its documented configuration, and call the required entity operation. Language references describe the argument shape, asynchronous behaviour, and returned values.
 

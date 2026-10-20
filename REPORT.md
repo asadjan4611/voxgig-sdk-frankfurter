@@ -2,40 +2,34 @@
 
 ## Project overview
 
-- **API:** Frankfurter API v2, an open-source API for current and historical
-  foreign-exchange rates from central banks and other official sources.
+- **API:** Frankfurter API v2, an open-source, read-only API for current and
+  historical foreign-exchange rates from official providers.
 - **Official documentation:** <https://frankfurter.dev/>
 - **OpenAPI source:** <https://api.frankfurter.dev/v2/openapi.json>
-  (OpenAPI 3.1.2, API version 2.1.1). A copy is retained at
+  (OpenAPI 3.1.2, API version 2.1.1). A local copy is retained at
   `.sdk/def/frankfurter-openapi.json` for reproducible generation.
 - **Repository:** <https://github.com/asadjan4611/voxgig-sdk-frankfurter>
-  (public, published with the repository owner's explicit approval).
-- **Output:** One TypeScript SDK target. The generator-created version remains
-  `0.0.1`; no npm package or release is claimed.
-- **Licensing:** This repository uses the MIT License. The upstream Frankfurter
-  specification identifies its project license as MIT.
+- **Output:** TypeScript SDK, generated version `0.0.1`. No npm publication or
+  release is claimed.
+- **License:** MIT. The upstream Frankfurter project is also MIT licensed.
 
 ## Selection rationale
 
-Frankfurter was selected because its API is small (nine read-only paths), its
-first-party OpenAPI document is public, it needs no credentials, and meaningful
-live tests can be run without creating data or incurring usage charges. These
-traits keep the assessment within its intended scope while still testing the
-SDK end to end.
+Frankfurter was selected because its API is small (nine safe GET operations),
+its first-party OpenAPI document is public, and it requires no credentials.
+This permits meaningful end-to-end testing without creating data, incurring
+charges, or expanding the assessment into a production project.
 
-On 20 October 2026, I enumerated all 804 public repositories returned by the
-GitHub API for the `voxgig-sdk` organization and searched their names
-case-insensitively for `frankfurter`; there were no matches. A search-engine
-query also found no Frankfurter repository in that organization. This is good
-evidence that the API is absent from the catalogue, although repository naming
-alone cannot prove that no differently named catalogue entry wraps the same
-API.
+On 20 October 2026, all 804 public repositories returned by the GitHub API for
+the `voxgig-sdk` organization were searched case-insensitively for
+`frankfurter`; there were no matches. A search-engine query also found no
+Frankfurter repository in that organization. Repository names cannot prove
+that a differently named SDK does not wrap the API, but this is reasonable
+evidence that Frankfurter was absent from the catalogue when selected.
 
-GitHub's public repository endpoint initially returned HTTP 404 for
-`asadjan4611/voxgig-sdk-frankfurter`, indicating no conflicting public
-repository existed when checked. GitHub CLI was reauthenticated through its
-browser device flow before the repository was created and pushed with explicit
-owner approval.
+The proposed repository name was also checked through GitHub's public API. It
+returned 404 before creation. The repository was created and pushed only after
+the owner explicitly approved publication.
 
 ## Generator experience
 
@@ -47,44 +41,60 @@ npx --yes @voxgig/create-sdkgen@0.30.8 frankfurter \
   -o ./voxgig-sdk-frankfurter
 ```
 
-Generation was then performed from `.sdk/` with `npm run generate`. This
-two-stage distinction matters: the `voxgig-sdkgen` CLI scaffolds targets and
-features, while the npm script runs model extraction and code generation.
+Subsequent generation was run from `.sdk/` with `npm run generate`. The
+generator produced four entities (`Coverage`, `Currency`, `Provider`, and
+`Rate`), package metadata, documentation, offline tests, and the TypeScript
+target.
 
-The straightforward parts were CLI help, dependency installation, target
-selection, generation, compile-time types, the offline test transport, and the
-large generated test suite. The project overlay made it possible to replace
-default repository, package, publisher, and author metadata without modifying
-the generated `ts/` output. Official documentation/specification links were
-likewise set in `.sdk/model/text.aontu`.
+Scaffolding, dependency installation, model extraction, TypeScript generation,
+and the offline test transport were straightforward. The generated project is
+substantial and its model/template separation makes output reproducible.
 
-Observed issues and limitations:
+The following issues were observed and addressed without hand-editing generated
+`ts/` source:
 
-1. The first generation logged `flow-step-unreachable` for
-   `BasicRateFlow#1 (load)` and disabled that step. This warning is difficult to
-   interpret without studying the generated model. The available `Rate.load`
-   route still worked in a live USD/EUR test, suggesting an alternate or
-   duplicate flow was disabled rather than the public operation as a whole.
-2. The generated coverage command sets an 88% function threshold, but the
-   generated suite reached 82.31%, so `npm run test-coverage` exits 1 even
-   though all 22 tests pass. This was not hidden or fixed by lowering the
-   threshold.
-3. Before the first generation, the scaffold did not yet contain the root
-   `AGENTS.md` described in current documentation; it appeared after
-   `npm run generate`. This is a sequencing/documentation ambiguity rather
-   than a lasting repository defect.
-4. The generated prose pluralizes `currency` as `currencys` and includes
-   generic `/api/resource/{id}` examples. They compile, but are less polished
-   than API-specific examples.
-5. The generated README suggests enabling `FRANKFURTER_TEST_LIVE=TRUE` and
-   running `npm test`, but this generated package has no dedicated
-   `test:live` script. Live calls were therefore executed explicitly through
-   the built SDK.
+1. The generated coverage gate initially failed at 82.31% function coverage
+   against its own 88% threshold. Focused tests for value objects, entity
+   lifecycle helpers, request routing, media handling, GraphQL helpers, and
+   response parsing raised function coverage to 88.86%. The threshold was not
+   lowered.
+2. The README described live testing but the package had no dedicated live
+   command. Declarative live hints and a generated `test:live` script now run
+   all nine operations plus a safe invalid-currency error case. Offline
+   `npm test` remains independent of the network.
+3. Generated examples used placeholders such as `/api/resource/{id}`,
+   `example_base`, and `currencys`. Generator components were adjusted to use
+   real Frankfurter routes/examples and clear list variable names.
+4. Standard Redocly recommended lint originally reported nine
+   `security-defined` errors and one missing-4XX warning. The local spec now
+   explicitly declares `security: []` for this public API and applies the
+   existing reusable 4XX response to `GET /providers`. Standard lint passes
+   without disabled rules.
+5. Live contract testing found that the API currently returns
+   `Provider.frequency: "weekly"`, while the downloaded official enum omitted
+   `weekly`. The local spec records this observed value and documents the
+   deviation.
+6. The generated live runner compared operation paths to the full server path
+   without accounting for the `/v2` base-path prefix. This caused successful
+   HTTP 200 calls to fail with “Entity selected wrong route.” The project-owned
+   template now verifies the operation path as the suffix of the server path.
+7. Generation continues to emit `flow-step-unreachable` for
+   `BasicRateFlow#1 (load)`. The warning is difficult to interpret, but both
+   generated `Rate.load` routes pass live tests, so it does not indicate a
+   missing public operation in this SDK.
 
-Approximate elapsed automated execution through final verification was 10
-minutes. No manual troubleshooting time was required from the repository owner,
-so the human contribution requested during this run was 0 minutes and remains
-within the assessment's 30-minute limit.
+These corrections intentionally customize generator components and one target
+template. Consequently, `voxgig-sdkgen doctor` exits 1 and reports 10 forked
+components, one edited template, and three project-owned additive components.
+This is recorded rather than concealed: running `target add ts` would overwrite
+the forked fixes. Normal generation, build, offline tests, coverage, and live
+tests all pass.
+
+Approximate automated execution was 10 minutes for the original assessment and
+about 18 minutes for this verification/remediation pass. The repository owner
+was not asked to perform manual troubleshooting, so additional human hands-on
+work for remediation was 0 minutes and the assessment remains within its
+30-minute human-work limit.
 
 ## Testing
 
@@ -96,49 +106,61 @@ Environment:
 - `@voxgig/sdkgen` 4.35.0; `@voxgig/apidef` 8.25.3
 - TypeScript 5.9.3; Redocly CLI 2.65.0
 
-Commands and outcomes:
+Commands and final outcomes:
 
 | Command/check | Status | Result |
 | --- | --- | --- |
-| `npx --yes @redocly/cli@latest lint .sdk/def/frankfurter-openapi.json` | Failed | 9 `security-defined` errors and 1 missing-4XX warning. The API is intentionally unauthenticated; these are recommended-policy findings, not parse errors. |
-| Same lint with only `security-defined` and `operation-4xx-response` skipped | Passed | OpenAPI document validated with no remaining findings. |
-| Official scaffold command shown above | Passed | Created the generator project and TypeScript target; npm reported 0 vulnerabilities in 106 scaffold dependencies. |
-| `cd .sdk && npm run generate` | Passed with warning | Generated four entities and the TypeScript SDK; emitted the documented `BasicRateFlow#1` warning. |
-| `cd ts && npm install --no-audit --no-fund` | Passed | Installed three development packages. |
-| `cd ts && npm run build` | Passed | TypeScript source and tests compiled. This is the available type check; no lint script was generated. |
-| `cd ts && npm test` | Passed | 22 passed, 0 failed, 0 skipped. Includes generated entity, pipeline, transport, and README-example tests. |
-| `cd ts && npm run test-coverage` | Failed | 22 tests passed, but function coverage was 82.31%, below the generated 88% threshold. Line coverage was 85.83% and branch coverage 83.20%. |
-| `cd .sdk && npm exec -- voxgig-sdkgen doctor` | Passed | `.sdk matches the scaffold (0 additive)`. |
-| Generated `direct()` call to `GET /currencies` | Passed | HTTP 200 and 165 records; no credentials used. |
-| Generated `Currency.list()` | Passed | Returned 165 entity records from the live API. |
-| Generated `Rate.load({ base: 'USD', quote: 'EUR' })` | Passed | Returned a current USD/EUR rate from the live API. |
+| `npx --yes @redocly/cli@2.65.0 lint .sdk/def/frankfurter-openapi.json` | Passed | Standard recommended configuration; no ignored rules or remaining findings. |
+| `cd .sdk && npm run generate` | Passed with warning | Generated all four entities and the TypeScript target; retained the documented `BasicRateFlow#1` warning. |
+| `cd ts && npm run build` | Passed | TypeScript source and tests compiled. No separate lint script is generated. |
+| `cd ts && npm test` | Passed | 246 passed, 0 failed, 14 intentionally skipped (unconfigured optional features and opt-in live tests). |
+| `cd ts && npm run test-coverage` | Passed | 246 passed, 0 failed, 14 skipped. Coverage: 88.51% lines, 84.53% branches, 88.86% functions; all configured gates passed. |
+| `cd ts && npm run test:live` | Passed | Both live test files passed. The operation harness attempted and passed all 9 documented GET operations; the separate invalid-currency request returned a verified 4xx response. |
+| `cd .sdk && npm exec -- voxgig-sdkgen doctor` | Failed (expected/customization) | Reports 10 forked components, 1 edited template, and 3 additive project components used for the documented corrections. |
 
-All live checks were safe, unauthenticated GET operations. No destructive or
-billable operation was performed, and no credential was used. Results reflect
-the API response on 20 October 2026 and may naturally change.
+The live operation suite verifies the generated method/route, required example
+parameters, a successful 2xx response, response parsing, and the response
+contract for:
+
+- `GET /coverage`
+- `GET /currencies`
+- `GET /currency/{code}`
+- `GET /providers`
+- `GET /providers/{provider}`
+- `GET /providers/{provider}/rates`
+- `GET /rates`
+- `GET /providers/{provider}/rate/{base}/{quote}`
+- `GET /rate/{base}/{quote}`
+
+It also verifies a representative invalid currency response. This is useful
+operation coverage, not a claim that every optional parameter combination,
+date boundary, provider, media type, or upstream failure mode was exhaustively
+tested. All calls were unauthenticated GET requests; no secret, destructive
+operation, or billable request was used.
 
 ## Suggestions
 
-- Explain `flow-step-unreachable` warnings with the affected OpenAPI path and
-  identify whether another route still implements the public entity method.
-- Ensure the generated test suite meets its own default coverage thresholds,
-  or derive thresholds from the generated feature set.
-- Generate API-specific direct-call examples instead of placeholder resource
-  paths when a suitable read-only endpoint is known.
-- Apply correct English pluralization in generated prose.
-- Generate a working live-test script when the README documents live-test
-  configuration, or omit those instructions when no scenario is generated.
-- Clarify in the quickstart that the root agent guide is emitted by the first
-  generation rather than necessarily being present immediately after scaffold.
-- Treat a public API with no authentication as `security: []` during spec
-  normalization, or document why an external recommended linter reports it.
+- Generate a dedicated live-test script whenever live instructions are emitted,
+  and keep it serial by default for public APIs.
+- Include a server base-path prefix when validating a generated route in the
+  live harness.
+- Derive examples from OpenAPI parameter examples and known read-only paths
+  instead of generic placeholders.
+- Ensure the generated baseline tests satisfy generated coverage gates, or make
+  the relationship between feature selection and thresholds explicit.
+- Explain `flow-step-unreachable` with the affected path and whether an
+  alternate point still implements the operation.
+- Provide a supported project-override mechanism for targeted generator fixes
+  that does not make `doctor` classify intentional changes as scaffold drift.
+- Consider validating the upstream spec against representative live responses;
+  this run found the missing `weekly` enum value immediately.
 
 ## Conclusion
 
-The generator produced a substantial, typed TypeScript SDK with useful offline
-tests quickly, and representative live operations worked without credentials.
-The developer experience was strongest around scaffolding, reproducibility,
-and generated tests. The unexplained flow warning, self-failing coverage gate,
-and several generic documentation details are important rough edges, but they
-do not prevent the generated SDK's tested read operations from working. The
-repository is published and ready for review at the URL above.
+The official generator produced a useful typed SDK quickly. After targeted,
+documented generator-level corrections, the project builds, its offline and
+coverage gates pass, its documentation examples are API-specific, standard
+OpenAPI lint passes, and all nine public operations plus an error path pass live
+verification. The remaining caveats are the persistent flow warning, intentional
+generator-template drift reported by `doctor`, and the deliberately limited
+scope of optional-parameter testing.

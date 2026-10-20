@@ -11,7 +11,6 @@ import {
   Main,
   Entity,
   Feature,
-  Readme,
   AgentGuide,
   Test,
 
@@ -32,6 +31,7 @@ import { PointUtil, Content } from 'jostraca'
 import { Top } from './Top'
 import { BuildSDK } from './BuildSDK'
 import { rootPlan } from './RootPlan'
+import { Readme } from './cmp/ts/Readme_ts'
 
 
 const {

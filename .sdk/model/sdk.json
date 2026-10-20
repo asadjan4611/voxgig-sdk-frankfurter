@@ -241,6 +241,7 @@
                     ]
                   },
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/coverage",
                   "q": {},
@@ -409,6 +410,7 @@
                     ]
                   },
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/currencies",
                   "q": {},
@@ -454,6 +456,7 @@
                     ]
                   },
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/currency/{code}",
                   "q": {
@@ -693,6 +696,7 @@
                   },
                   "g": {},
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/providers",
                   "q": {},
@@ -738,6 +742,7 @@
                     ]
                   },
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/providers/{provider}",
                   "q": {
@@ -934,6 +939,7 @@
                     ]
                   },
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/providers/{provider}/rates",
                   "q": {
@@ -1053,6 +1059,7 @@
                     ]
                   },
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/rates",
                   "q": {},
@@ -1134,6 +1141,7 @@
                     ]
                   },
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/providers/{provider}/rate/{base}/{quote}",
                   "q": {
@@ -1220,6 +1228,7 @@
                     ]
                   },
                   "k": "http",
+                  "li": true,
                   "m": "GET",
                   "o": "/rate/{base}/{quote}",
                   "q": {

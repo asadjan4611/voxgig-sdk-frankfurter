@@ -144,6 +144,7 @@ main: kit: entity: rate: {
               }
             ]
           }
+          li: true
           m: "GET"
           o: "/providers/{provider}/rates"
           q: {
@@ -252,6 +253,7 @@ main: kit: entity: rate: {
               }
             ]
           }
+          li: true
           m: "GET"
           o: "/rates"
           rs: {
@@ -324,6 +326,7 @@ main: kit: entity: rate: {
               }
             ]
           }
+          li: true
           m: "GET"
           o: "/providers/{provider}/rate/{base}/{quote}"
           q: {
@@ -403,6 +406,7 @@ main: kit: entity: rate: {
               }
             ]
           }
+          li: true
           m: "GET"
           o: "/rate/{base}/{quote}"
           q: {

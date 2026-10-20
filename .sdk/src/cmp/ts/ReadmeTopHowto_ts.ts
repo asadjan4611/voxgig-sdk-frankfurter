@@ -8,9 +8,8 @@ const ReadmeTopHowto = cmp(function ReadmeTopHowto(props: any) {
   Content(`**TypeScript:**
 \`\`\`ts
 const result = await client.direct({
-  path: '/api/resource/{id}',
+  path: '/currencies',
   method: 'GET',
-  params: { id: 'example' },
 })
 if (result.ok) {
   console.log(result.data)

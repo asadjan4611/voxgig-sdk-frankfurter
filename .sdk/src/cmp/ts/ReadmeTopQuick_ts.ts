@@ -52,8 +52,8 @@ const client = ${ctor}
 
     if (opnames.includes('list')) {
       Content(`// List all ${eName.toLowerCase()}s (returns ${eName}Entity[], one entity per record)
-const ${eVar}s = await client.${eName}().list(${listMatchArg('ts', exampleEntity)})
-for (const ${eVar} of ${eVar}s) {
+const ${eVar}List = await client.${eName}().list(${listMatchArg('ts', exampleEntity)})
+for (const ${eVar} of ${eVar}List) {
   console.log(${eVar}.data())
 }
 `)

@@ -242,7 +242,7 @@ const results = await client.Currency().list()
 Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.Currency().load({ id: 'currency_id' })
+const result = await client.Currency().load({ id: 'USD' })
 ```
 
 ### Common Methods
@@ -314,7 +314,7 @@ const results = await client.Provider().list()
 Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.Provider().load({ id: 'provider_id' })
+const result = await client.Provider().load({ id: 'ECB' })
 ```
 
 ### Common Methods
@@ -377,7 +377,7 @@ const results = await client.Rate().list()
 Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.Rate().load({ base: 'base', quote: 'quote' })
+const result = await client.Rate().load({ base: 'EUR', quote: 'USD' })
 ```
 
 ### Common Methods

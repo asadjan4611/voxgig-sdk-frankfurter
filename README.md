@@ -47,9 +47,9 @@ const client = FrankfurterSDK.test({
     },
   },
 })
-const currencys = await client.Currency().list()
-// currencys is an array of Currency entities, one per mock record
-console.log(currencys.map((currency) => currency.data()))
+const currencyList = await client.Currency().list()
+// currencyList is an array of Currency entities, one per mock record
+console.log(currencyList.map((currency) => currency.data()))
 ```
 
 ## Packages
@@ -70,8 +70,8 @@ const client = new FrankfurterSDK()
 
 // Load a specific rate (returns the entity, a RateEntity)
 const rate = await client.Rate().load({
-  base: 'example_base',
-  quote: 'example_quote',
+  base: 'EUR',
+  quote: 'USD',
 })
 console.log(rate.data())
 ```
@@ -117,9 +117,8 @@ When the entity interface does not cover an endpoint, use `direct`:
 **TypeScript:**
 ```ts
 const result = await client.direct({
-  path: '/api/resource/{id}',
+  path: '/currencies',
   method: 'GET',
-  params: { id: 'example' },
 })
 if (result.ok) {
   console.log(result.data)

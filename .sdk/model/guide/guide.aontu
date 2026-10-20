@@ -4,5 +4,21 @@
 
 @"./base-guide.aontu"
 
+guide: entity: coverage: path: "/coverage": op: load: live: true
 
+guide: entity: currency: {
+  path: "/currencies": op: list: live: true
+  path: "/currency/{code}": op: load: live: true
+}
 
+guide: entity: provider: {
+  path: "/providers": op: list: live: true
+  path: "/providers/{provider}": op: load: live: true
+}
+
+guide: entity: rate: {
+  path: "/providers/{provider}/rate/{base}/{quote}": op: load: live: true
+  path: "/providers/{provider}/rates": op: list: live: true
+  path: "/rate/{base}/{quote}": op: load: live: true
+  path: "/rates": op: list: live: true
+}
