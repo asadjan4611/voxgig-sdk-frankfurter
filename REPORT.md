@@ -9,6 +9,8 @@
   (OpenAPI 3.1.2, API version 2.1.1). A local copy is retained at
   `.sdk/def/frankfurter-openapi.json` for reproducible generation.
 - **Repository:** <https://github.com/asadjan4611/voxgig-sdk-frankfurter>
+- **Repository status:** Public GitHub repository, pushed to `main` after the
+  owner's explicit approval.
 - **Output:** TypeScript SDK, generated version `0.0.1`. No npm publication or
   release is claimed.
 - **License:** MIT. The upstream Frankfurter project is also MIT licensed.
@@ -19,6 +21,11 @@ Frankfurter was selected because its API is small (nine safe GET operations),
 its first-party OpenAPI document is public, and it requires no credentials.
 This permits meaningful end-to-end testing without creating data, incurring
 charges, or expanding the assessment into a production project.
+
+No credentials are required for the selected API. The planned target was one
+TypeScript SDK, with reproducible offline tests, a coverage gate, and safe live
+GET tests against the public API. This matches the assessment scope without
+claiming that every optional parameter combination can be exhausted.
 
 On 20 October 2026, all 804 public repositories returned by the GitHub API for
 the `voxgig-sdk` organization were searched case-insensitively for
@@ -92,9 +99,10 @@ tests all pass.
 
 Approximate automated execution was 10 minutes for the original assessment and
 about 18 minutes for this verification/remediation pass. The repository owner
-was not asked to perform manual troubleshooting, so additional human hands-on
-work for remediation was 0 minutes and the assessment remains within its
-30-minute human-work limit.
+provided publication authorization but was not asked to troubleshoot manually.
+Automated runtime is distinguished from human hands-on work; the remediation
+required no additional human troubleshooting and remains within the
+assessment's 30-minute human-work limit.
 
 ## Testing
 
@@ -112,10 +120,14 @@ Commands and final outcomes:
 | --- | --- | --- |
 | `npx --yes @redocly/cli@2.65.0 lint .sdk/def/frankfurter-openapi.json` | Passed | Standard recommended configuration; no ignored rules or remaining findings. |
 | `cd .sdk && npm run generate` | Passed with warning | Generated all four entities and the TypeScript target; retained the documented `BasicRateFlow#1` warning. |
+| `cd ts && npm install --no-audit --no-fund` | Passed | Installed the generated target's development dependencies. |
 | `cd ts && npm run build` | Passed | TypeScript source and tests compiled. No separate lint script is generated. |
 | `cd ts && npm test` | Passed | 246 passed, 0 failed, 14 intentionally skipped (unconfigured optional features and opt-in live tests). |
 | `cd ts && npm run test-coverage` | Passed | 246 passed, 0 failed, 14 skipped. Coverage: 88.51% lines, 84.53% branches, 88.86% functions; all configured gates passed. |
 | `cd ts && npm run test:live` | Passed | Both live test files passed. The operation harness attempted and passed all 9 documented GET operations; the separate invalid-currency request returned a verified 4xx response. |
+| README example checks | Passed | Generated README/reference examples were type-checked or executed by the test suite. |
+| Secret/configuration scan and `git diff --check` | Passed | No credential patterns, private keys, or local `.env` files were found; no whitespace errors. |
+| GitHub Actions `ci` and `Documentation` | Passed | Both post-push workflows completed successfully for commit `51ff558`. |
 | `cd .sdk && npm exec -- voxgig-sdkgen doctor` | Failed (expected/customization) | Reports 10 forked components, 1 edited template, and 3 additive project components used for the documented corrections. |
 
 The live operation suite verifies the generated method/route, required example
